@@ -2,5 +2,29 @@ version: '1.0'
 
 services:
   loaction:
+    container_name: loacation-app
     build: ./loaction
-    ports: -${}
+    ports:
+      - ${LOCATION_PORT}:${LOCATION_PORT}
+    networks:
+      - ${NETWORK_NAME}
+
+  map:
+    container_name: map-app
+    build: ./map
+    ports:
+      - ${MAP_PORT}:${MAP_PORT}
+    networks:
+      - ${NETWORK_NAME}
+
+  grafana:
+    container_name: grafana
+    build: ./grafana
+    ports:
+      - ${GRAFANA_PORT}:${GRAFANA_PORT}
+    networks:
+      - ${NETWORK_NAME}
+
+  networks:
+    app-network:
+      name: ${NETWORK_NAME}
